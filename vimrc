@@ -64,7 +64,6 @@ function! FileToRegister()
     let l:register = input("Enter register key: ")
     let l:current_file = expand("%:.")
     execute "let @".l:register." = ':e ".l:current_file."'"
-    execute "nnoremap @".l:register." <cmd>@".l:register."<CR>"
 endfunction
 
 " show git blame
