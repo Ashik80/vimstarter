@@ -16,7 +16,7 @@ set showcmd
 set ttimeoutlen=0
 
 " commands
-command! ListFiles execute '.!find . -type d \( -name .git -o -name node_modules -o -name .build -o -name dist -o -name __pycache__ \) -prune -o -type f -print | sed "s/^.\//:e /"'
+command! ListFiles execute '.!find . -type d \( -name .git -o -name node_modules -o -name .build -o -name dist -o -name __pycache__ -o -name .next \) -prune -o -type f -print | sed "s/^.\//:e /"'
 
 " colorscheme
 colorscheme desert
