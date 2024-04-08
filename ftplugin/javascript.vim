@@ -2,6 +2,7 @@ setlocal shiftwidth=2 tabstop=2
 
 command! EslintFixAll execute 'silent !eslint_d --fix %' | redraw! | e
 command! PrettierFormat execute 'silent !npx prettier -w %' | redraw! | e
+command! MakeTags execute 'silent !ctags -R --exclude=.git --exclude=node_modules --exclude=.build --exclude=dist --exclude=.next .' | redraw! | e
 
 function! ImportRelativeFile()
     let l:splitted_source = split(@f, "/")
@@ -37,3 +38,4 @@ endfunction
 nnoremap <leader>fe <cmd>EslintFixAll<CR>
 nnoremap <leader>fp <cmd>PrettierFormat<CR>
 nnoremap <leader>pf <cmd>call ImportRelativeFile()<CR>
+nnoremap <leader>mt <cmd>MakeTags<CR>

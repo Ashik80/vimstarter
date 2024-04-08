@@ -22,6 +22,7 @@ command! ListFiles execute '.!find . -type d \( -name .git -o -name node_modules
 colorscheme desert
 hi Normal ctermbg=NONE
 hi NonText ctermbg=NONE
+hi MatchParen term=bold cterm=bold ctermfg=143 ctermbg=NONE guifg=#bdb76b guibg=NONE
 
 " status line plugin
 let g:modes = {
@@ -79,3 +80,5 @@ nnoremap <leader>q <cmd>qa!<CR>
 nnoremap <leader>fr <cmd>call FileToRegister()<CR>
 nnoremap <leader>lf <cmd>ListFiles<CR>
 nnoremap <leader>gb <cmd>call GitBlameFewLines()<CR>
+vnoremap > >gv
+vnoremap < <gv

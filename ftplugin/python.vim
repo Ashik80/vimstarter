@@ -1,3 +1,5 @@
+command! MakeTags execute 'silent !ctags -R --exclude=.git --exclude=venv .' | redraw! | e
+
 function! ImportRelativeFile()
     let l:splitted_source = split(@f, "/")
     let l:splitted_path = l:splitted_source[0:-2]
@@ -9,3 +11,4 @@ function! ImportRelativeFile()
 endfunction
 
 nnoremap <leader>pf <cmd>call ImportRelativeFile()<CR>
+nnoremap <leader>mt <cmd>MakeTags<CR>
