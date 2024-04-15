@@ -11,5 +11,7 @@ function! ImportRelativeFile()
     execute "norm a".l:relative_path
 endfunction
 
+compiler pyright
+
 nnoremap <leader>pf <cmd>call ImportRelativeFile()<CR>
 nnoremap <leader>mt <cmd>MakeTags<CR>
