@@ -4,6 +4,7 @@ command! EslintFixAll execute 'silent !eslint_d --fix %' | redraw! | e
 command! PrettierFormat execute 'silent !npx prettier -w %' | redraw! | e
 command! MakeTags execute 'silent !ctags -R --exclude=.git --exclude=node_modules --exclude=.build --exclude=dist --exclude=.next .' | redraw! | e
 
+" generates the relative path of the file being imported from the current file
 function! ImportRelativeFile()
     let l:splitted_source = split(@f, "/")
     let l:source_filename = l:splitted_source[-1]

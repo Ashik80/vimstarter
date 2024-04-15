@@ -17,6 +17,7 @@ set ttimeoutlen=0
 
 " commands
 command! ListFiles execute '.!find . -type d \( -name .git -o -name node_modules -o -name .build -o -name dist -o -name __pycache__ -o -name .next \) -prune -o -type f -print | sed "s/^.\//:e /"'
+command! Build execute 'silent make' | redraw! | cw
 
 " colorscheme
 colorscheme desert
@@ -82,3 +83,4 @@ nnoremap <leader>lf <cmd>ListFiles<CR>
 nnoremap <leader>gb <cmd>call GitBlameFewLines()<CR>
 vnoremap > >gv
 vnoremap < <gv
+nnoremap <leader>b <cmd>Build<CR>
