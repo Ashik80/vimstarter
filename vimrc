@@ -9,6 +9,7 @@ set noswapfile
 set incsearch
 set hidden
 set shiftwidth=4 tabstop=4 expandtab
+set smartindent autoindent
 set backspace=indent,eol,start
 set ignorecase
 set laststatus=2
@@ -84,3 +85,5 @@ nnoremap <leader>gb <cmd>call GitBlameFewLines()<CR>
 vnoremap > >gv
 vnoremap < <gv
 nnoremap <leader>b <cmd>Build<CR>
+nnoremap <C-h> <cmd>cn<CR>
+nnoremap <C-k> <cmd>cp<CR>
