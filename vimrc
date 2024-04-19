@@ -22,10 +22,13 @@ command! ListFiles execute '.!find . -type d \( -name .git -o -name node_modules
 command! Build execute 'silent make' | redraw! | cw
 
 " colorscheme
-colorscheme desert
+" colorscheme desert
+" hi Normal ctermbg=NONE
+" hi NonText ctermbg=NONE
+" hi MatchParen term=bold cterm=bold ctermfg=143 ctermbg=NONE guifg=#bdb76b guibg=NONE
+
+colorscheme tokyonight
 hi Normal ctermbg=NONE
-hi NonText ctermbg=NONE
-hi MatchParen term=bold cterm=bold ctermfg=143 ctermbg=NONE guifg=#bdb76b guibg=NONE
 
 " status line plugin
 let g:modes = {
@@ -36,6 +39,7 @@ let g:modes = {
             \ '': 'VISUAL BLOCK',
             \ 'c': 'COMMAND',
             \ 'R': 'REPLACE',
+            \ 'r': 'REPLACE',
             \ 't': 'TERMINAL'
             \ }
 
@@ -43,7 +47,7 @@ function! GetFileType()
     if &filetype == ""
         return ""
     endif
-    return "%#Search# %y"
+    return "%#Folded# %y"
 endfunction
 
 function! GetLineAndColumn()
@@ -55,13 +59,18 @@ let g:git_branch = ""
 function! GetGitBranch()
     let l:branch = system("git branch | grep ^* | sed 's/\* //'")
     if l:branch != ""
-        let g:git_branch = "%#Pmenu# ".split(l:branch, '\n')[0]." "
+        " let g:git_branch = \"%#Pmenu# \".split(l:branch, '\n')[0]." "
+        let g:git_branch = "%#Folded# ".split(l:branch, '\n')[0]." "
     endif
 endfunction
 
 call GetGitBranch()
 
-set statusline=%#PmenuSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Folded#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#PmenuSel#\ %{%GetLineAndColumn()%}
+" desert statusline
+" set statusline=%#PmenuSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Folded#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#PmenuSel#\ %{%GetLineAndColumn()%}
+
+" tokyonight statusline
+set statusline=%#TabLineSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Pmenu#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#TabLineSel#\ %{%GetLineAndColumn()%}
 
 " file to register
 function! FileToRegister()
