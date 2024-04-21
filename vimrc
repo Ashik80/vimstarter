@@ -79,12 +79,13 @@ function! FileToRegister()
     execute "let @".l:register." = ':e ".l:current_file."'"
 endfunction
 
-" show git blame
+" show git blame for the next 10 lines
 function! GitBlameFewLines()
     execute "!echo '------------------- GIT BLAME -------------------'"
     execute "!git blame -c -L ".line(".").",+10 %"
 endfunction
 
+" toggle terminal
 function! ToggleTerm()
     let l:terms = term_list()
     if empty(l:terms)
@@ -98,6 +99,34 @@ function! ToggleTerm()
             execute bufwinnr(l:term) "close"
         endif
     endif
+endfunction
+
+" grep/search functionality
+" same functionality with grep and vimgrep. default: vimgrep
+" change to grep in the keybinding if more speed is needed
+function! GrepProject()
+    let l:word = input("Search for pattern: ")
+    execute "grep! -Ri --exclude={tags,tsconfig.tsbuildinfo} --exclude-dir={.git,node_modules,.next,.build,dist,target,__pycache__} ".l:word." ."
+    cwindow
+endfunction
+
+function! VimGrepProject()
+    let l:word = input("Search for pattern: ")
+    execute 'vimgrep! /'.l:word.'/ `find . -type d \( -name .git -o -name node_modules -o -name .next -o -name .build -o -name dist -o -name target -o -name __pycache__ \) -prune -o -type f \( -name tags -o -name tsconfig.tsbuildinfo \) -prune -o -type f -print`'
+    cwindow
+endfunction
+
+function! GrepProjectForExactWord()
+    let l:word = input("Search for exact word: ")
+    echo "\n".l:word
+    execute "grep! -Riw --exclude={tags,tsconfig.tsbuildinfo} --exclude-dir={.git,node_modules,.next,.build,dist,target,__pycache__} ".l:word." ."
+    cwindow
+endfunction
+
+function! VimGrepProjectForExactWord()
+    let l:word = input("Search for exact word: ")
+    execute 'vimgrep! /\<'.l:word.'\>/ `find . -type d \( -name .git -o -name node_modules -o -name .next -o -name .build -o -name dist -o -name target -o -name __pycache__ \) -prune -o -type f \( -name tags -o -name tsconfig.tsbuildinfo \) -prune -o -type f -print`'
+    cwindow
 endfunction
 
 " mappings
@@ -114,3 +143,5 @@ nnoremap <C-h> <cmd>cn<CR>
 nnoremap <C-k> <cmd>cp<CR>
 nnoremap <leader>t <cmd>call ToggleTerm()<CR>
 tnoremap <leader>t <cmd>call ToggleTerm()<CR>
+nnoremap <leader>fg <cmd>call VimGrepProject()<CR>
+nnoremap <leader>fw <cmd>call VimGrepProjectForExactWord()<CR>
