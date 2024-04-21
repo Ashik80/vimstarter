@@ -85,6 +85,21 @@ function! GitBlameFewLines()
     execute "!git blame -c -L ".line(".").",+10 %"
 endfunction
 
+function! ToggleTerm()
+    let l:terms = term_list()
+    if empty(l:terms)
+        execute "bel terminal"
+    else
+        let l:term = l:terms[0]
+        if bufwinnr(l:term) < 0
+            execute "bel split"
+            execute "buffer ".l:term
+        else
+            execute bufwinnr(l:term) "close"
+        endif
+    endif
+endfunction
+
 " mappings
 vnoremap <leader>y :w !xclip -selection 'clipboard'<CR><CR>
 nnoremap <leader>yf <cmd>let @f = expand("%:.")<CR>
@@ -97,3 +112,5 @@ vnoremap < <gv
 nnoremap <leader>b <cmd>Build<CR>
 nnoremap <C-h> <cmd>cn<CR>
 nnoremap <C-k> <cmd>cp<CR>
+nnoremap <leader>t <cmd>call ToggleTerm()<CR>
+tnoremap <leader>t <cmd>call ToggleTerm()<CR>
