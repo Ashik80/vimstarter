@@ -16,6 +16,7 @@ set laststatus=2
 set showcmd
 set ttimeoutlen=0
 set scrolloff=8
+set cursorline
 
 " commands
 command! ListFiles execute '.!find . -type d \( -name .git -o -name node_modules -o -name .build -o -name dist -o -name __pycache__ -o -name .next \) -prune -o -type f -print | sed "s/^\.\///"'
@@ -27,8 +28,12 @@ command! Build execute 'silent make' | redraw! | cw
 " hi NonText ctermbg=NONE
 " hi MatchParen term=bold cterm=bold ctermfg=143 ctermbg=NONE guifg=#bdb76b guibg=NONE
 
-colorscheme tokyonight
-hi Normal ctermbg=NONE
+" colorscheme tokyonight
+" hi Normal ctermbg=NONE
+" hi CursorLine ctermbg=black
+
+colorscheme koehler
+hi MatchParen term=bold cterm=bold ctermfg=226 ctermbg=NONE guifg=#ffff00 guibg=NONE
 
 " status line plugin
 let g:modes = {
@@ -59,8 +64,14 @@ let g:git_branch = ""
 function! GetGitBranch()
     let l:branch = system("git branch | grep ^* | sed 's/\* //'")
     if l:branch != ""
+        " for desert
         " let g:git_branch = \"%#Pmenu# \".split(l:branch, '\n')[0]." "
+
+        " for koehler
         let g:git_branch = "%#Folded# ".split(l:branch, '\n')[0]." "
+
+        " for tokyonight
+        " let g:git_branch = \"%#Folded# \".split(l:branch, '\n')[0]." "
     endif
 endfunction
 
@@ -69,8 +80,11 @@ call GetGitBranch()
 " desert statusline
 " set statusline=%#PmenuSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Folded#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#PmenuSel#\ %{%GetLineAndColumn()%}
 
+" koehler statusline
+set statusline=%#PmenuSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Pmenu#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#PmenuSel#\ %{%GetLineAndColumn()%}
+
 " tokyonight statusline
-set statusline=%#TabLineSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Pmenu#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#TabLineSel#\ %{%GetLineAndColumn()%}
+" set statusline=%#TabLineSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Pmenu#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#TabLineSel#\ %{%GetLineAndColumn()%}
 
 " file to register
 function! FileToRegister()
