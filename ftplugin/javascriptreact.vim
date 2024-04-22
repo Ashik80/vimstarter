@@ -1,32 +1,32 @@
 runtime! ftplugin/javascript.vim
 
 function! NormNewLine()
-    execute 'norm o'
+    execute "norm o"
 endfunction
 
 function! NormText(text)
-    execute 'norm i'.a:text
+    execute "norm i".a:text
 endfunction
 
 function! NormIndentLeft()
-  execute 'norm <<'
+  execute "norm <<"
 endfunction
 
 function! NormGoToTop()
-  execute 'norm gg'
+  execute "norm gg"
 endfunction
 
 function! SearchWord(word)
-  execute 'silent vimgrep '.a:word.' %'
+  execute "silent vimgrep ".a:word." %"
 endfunction
 
 function! SelectWord()
-  execute 'norm viw'
+  execute "norm viw"
 endfunction
 
 " snippets mappings
 " function component (rfc)
-inoremap rfc<Tab> <cmd>call NormText('import React from "react";') \| call NormNewLine() \| call NormNewLine() \| call NormText('export default function ComponentName() {') \| call NormNewLine() \| call NormText('<tab>return (') \| call NormNewLine() \| call NormText('<tab><tab><div>hello</div>') \| call NormNewLine() \| call NormText('<tab>);') \| call NormNewLine() \| call NormText('}') \| call NormIndentLeft() \| call NormGoToTop() \| call SearchWord('ComponentName') \| call SelectWord()<CR>
+inoremap ;rfc <cmd>call NormText('import React from "react";') <bar> call NormNewLine() <bar> call NormNewLine() <bar> call NormText('export default function ComponentName() {') <bar> call NormNewLine() <bar> call NormText('<tab>return (') <bar> call NormNewLine() <bar> call NormText('<tab><tab><div>hello</div>') <bar> call NormNewLine() <bar> call NormText('<tab>);') <bar> call NormNewLine() <bar> call NormText('}') <bar> call NormIndentLeft() <bar> call NormGoToTop() <bar> call SearchWord('ComponentName') <bar> call SelectWord()<CR><Esc>l
 
 " arrow component (rafc)
-inoremap rafc<Tab> <cmd>call NormText('import React from "react";') \| call NormNewLine() \| call NormNewLine() \| call NormText('const ComponentName = () => {') \| call NormNewLine() \| call NormText('<tab>return (') \| call NormNewLine() \| call NormText('<tab><tab><div>hello</div>') \| call NormNewLine() \| call NormText('<tab>);') \| call NormNewLine() \| call NormText('};') \| call NormIndentLeft() \| call NormNewLine() \| call NormNewLine() \| call NormText('export default ComponentName;') \| call NormGoToTop() \| call SearchWord('ComponentName') \| call SelectWord()<CR>
+inoremap ;rafc <cmd>call NormText('import React from "react";') <bar> call NormNewLine() <bar> call NormNewLine() <bar> call NormText('const ComponentName = () => {') <bar> call NormNewLine() <bar> call NormText('<tab>return (') <bar> call NormNewLine() <bar> call NormText('<tab><tab><div>hello</div>') <bar> call NormNewLine() <bar> call NormText('<tab>);') <bar> call NormNewLine() <bar> call NormText('};') <bar> call NormIndentLeft() <bar> call NormNewLine() <bar> call NormNewLine() <bar> call NormText('export default ComponentName;') <bar> call NormGoToTop() <bar> call SearchWord('ComponentName') <bar> call SelectWord()<CR><Esc>l
