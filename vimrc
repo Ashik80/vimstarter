@@ -19,8 +19,9 @@ set scrolloff=8
 set cursorline
 
 " commands
-command! ListFiles execute '.!find . -type d \( -name .git -o -name node_modules -o -name .build -o -name dist -o -name __pycache__ -o -name .next \) -prune -o -type f -print | sed "s/^\.\///"'
+command! ListFiles execute '.!find . -type d \( -name .git -o -name node_modules -o -name .build -o -name dist -o -name __pycache__ -o -name .next -o -name target \) -prune -o -type f -print | sed "s/^\.\///"'
 command! Build execute 'silent make' | redraw! | cw
+command! MkdirAndSave execute 'silent !mkdir -p %:h' | redraw! | w
 
 " colorscheme
 " colorscheme desert
@@ -159,3 +160,5 @@ nnoremap <leader>t <cmd>call ToggleTerm()<CR>
 tnoremap <leader>t <cmd>call ToggleTerm()<CR>
 nnoremap <leader>fg <cmd>call VimGrepProject()<CR>
 nnoremap <leader>fw <cmd>call VimGrepProjectForExactWord()<CR>
+nnoremap <leader>ff <cmd>b 1<CR>
+nnoremap <leader>w <cmd>MkdirAndSave<CR>
