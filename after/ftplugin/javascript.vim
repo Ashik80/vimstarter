@@ -38,7 +38,7 @@ endfunction
 
 " comment visually selected block
 function! CommentBlock()
-    execute "norm `<0w"
+    execute "norm `<^"
     let l:starting_line = line("'<")
     let l:starting_col = col(".")
     let l:end_line = line("'>")
