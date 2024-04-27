@@ -162,3 +162,4 @@ nnoremap <leader>fg <cmd>call VimGrepProject()<CR>
 nnoremap <leader>fw <cmd>call VimGrepProjectForExactWord()<CR>
 nnoremap <leader>ff <cmd>b 1<CR>
 nnoremap <leader>w <cmd>MkdirAndSave<CR>
+nnoremap <leader>ve <cmd>vsplit $MYVIMRC<CR>
