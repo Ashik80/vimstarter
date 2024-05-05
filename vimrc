@@ -161,7 +161,7 @@ nnoremap <leader>fw <cmd>call VimGrepProjectForExactWord()<CR>
 nnoremap <leader>ff <cmd>b 1<CR>
 nnoremap <leader>w <cmd>MkdirAndSave<CR>
 " replace all occurences of word in line
-vnoremap <leader>r y:s/<c-r>"//g<left><left>
+vnoremap <leader>s y:s/<c-r>"//g<left><left>
 " edit vimrc from anywhere
 nnoremap <leader>ve <cmd>vsplit $MYVIMRC<CR>
 " surround word with quotes/brackets

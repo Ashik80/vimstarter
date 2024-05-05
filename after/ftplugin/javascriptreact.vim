@@ -3,9 +3,9 @@ runtime! snippet_helpers.vim
 
 " snippets mappings
 " function component (rfc)
-inoremap ;rfc <cmd>call NormText('import React from "react";') <bar> call NormNewLine() <bar> call NormNewLine() <bar> call NormText('export default function ComponentName() {') <bar> call NormNewLine() <bar> call NormText('<tab>return (') <bar> call NormNewLine() <bar> call NormText('<tab><tab><div>hello</div>') <bar> call NormNewLine() <bar> call NormText('<tab>);') <bar> call NormNewLine() <bar> call NormText('}') <bar> call NormIndentLeft() <bar> call NormGoToTop() <bar> call SearchWord('ComponentName') <bar> call SelectWord()<CR><Esc>l
+iabbrev rfc import React from "react";<CR><CR>export default function ComponentName() {<CR>return (<CR><div>hello</div><CR>)<CR>}<Esc>gg?ComponentName<CR>viw
 
 " arrow component (rafc)
-inoremap ;rafc <cmd>call NormText('import React from "react";') <bar> call NormNewLine() <bar> call NormNewLine() <bar> call NormText('const ComponentName = () => {') <bar> call NormNewLine() <bar> call NormText('<tab>return (') <bar> call NormNewLine() <bar> call NormText('<tab><tab><div>hello</div>') <bar> call NormNewLine() <bar> call NormText('<tab>);') <bar> call NormNewLine() <bar> call NormText('};') <bar> call NormIndentLeft() <bar> call NormNewLine() <bar> call NormNewLine() <bar> call NormText('export default ComponentName;') <bar> call NormGoToTop() <bar> call SearchWord('ComponentName') <bar> call SelectWord()<CR><Esc>l
+iabbrev rafc import React from "react";<CR><CR>const ComponentName = () => {<CR>return (<CR><div>hello</div><CR>)<CR>}<CR><CR>export default ComponentName;<Esc>gg?ComponentName<CR>viw
 
-inoremap ;img <img src="" alt="" /><Esc>F<f"a
+iabbrev img <img src="" alt="" /><ESC>F<f"a
