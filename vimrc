@@ -24,17 +24,15 @@ command! Build execute 'silent make' | redraw! | cw
 command! MkdirAndSave execute 'silent !mkdir -p %:h' | redraw! | w
 
 " colorscheme
-" colorscheme desert
-" hi Normal ctermbg=NONE
-" hi NonText ctermbg=NONE
-" hi MatchParen term=bold cterm=bold ctermfg=143 ctermbg=NONE guifg=#bdb76b guibg=NONE
-
 " colorscheme tokyonight
 " hi Normal ctermbg=NONE
 " hi CursorLine ctermbg=black
 
-colorscheme koehler
-hi MatchParen term=bold cterm=bold ctermfg=226 ctermbg=NONE guifg=#ffff00 guibg=NONE
+" colorscheme koehler
+" hi MatchParen term=bold cterm=bold ctermfg=226 ctermbg=NONE guifg=#ffff00 guibg=NONE
+
+colorscheme rosepine
+hi Normal ctermbg=NONE
 
 " status line plugin
 let g:modes = {
@@ -53,7 +51,7 @@ function! GetFileType()
     if &filetype == ""
         return ""
     endif
-    return "%#Folded# %y"
+    return "%#Question# %y"
 endfunction
 
 function! GetLineAndColumn()
@@ -65,11 +63,11 @@ let g:git_branch = ""
 function! GetGitBranch()
     let l:branch = system("git branch | grep ^* | sed 's/\* //'")
     if l:branch != ""
-        " for desert
-        " let g:git_branch = \"%#Pmenu# \".split(l:branch, '\n')[0]." "
-
         " for koehler
-        let g:git_branch = "%#Folded# ".split(l:branch, '\n')[0]." "
+        " let g:git_branch = \"%#Folded# \".split(l:branch, '\n')[0]." "
+
+        " for rosepine
+        let g:git_branch = "%#Question# ".split(l:branch, '\n')[0]." "
 
         " for tokyonight
         " let g:git_branch = \"%#Folded# \".split(l:branch, '\n')[0]." "
@@ -78,11 +76,11 @@ endfunction
 
 call GetGitBranch()
 
-" desert statusline
-" set statusline=%#PmenuSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Folded#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#PmenuSel#\ %{%GetLineAndColumn()%}
+" rosepine statusline
+set statusline=%#CurSearch#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Pmenu#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#CurSearch#\ %{%GetLineAndColumn()%}
 
 " koehler statusline
-set statusline=%#PmenuSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Pmenu#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#PmenuSel#\ %{%GetLineAndColumn()%}
+" set statusline=%#PmenuSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Pmenu#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#PmenuSel#\ %{%GetLineAndColumn()%}
 
 " tokyonight statusline
 " set statusline=%#TabLineSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Pmenu#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#TabLineSel#\ %{%GetLineAndColumn()%}
@@ -154,8 +152,8 @@ nnoremap <leader>gb <cmd>call GitBlameFewLines()<CR>
 vnoremap > >gv
 vnoremap < <gv
 nnoremap <leader>b <cmd>Build<CR>
-nnoremap <C-h> <cmd>cn<CR>
-nnoremap <C-k> <cmd>cp<CR>
+nnoremap <C-n> <cmd>cn<CR>
+nnoremap <C-p> <cmd>cp<CR>
 nnoremap <leader>t <cmd>call ToggleTerm()<CR>
 tnoremap <leader>t <cmd>call ToggleTerm()<CR>
 nnoremap <leader>fg <cmd>call VimGrepProject()<CR>
@@ -166,6 +164,9 @@ nnoremap <leader>w <cmd>MkdirAndSave<CR>
 vnoremap <leader>r y:s/<c-r>"//g<left><left>
 " edit vimrc from anywhere
 nnoremap <leader>ve <cmd>vsplit $MYVIMRC<CR>
-" surround word with quotes
+" surround word with quotes/brackets
 vnoremap <leader>" c"<c-r>""<esc>
 vnoremap <leader>' c'<c-r>"'<esc>
+vnoremap <leader>) c(<c-r>")<esc>
+vnoremap <leader>} c{<c-r>"}<esc>
+vnoremap <leader>] c[<c-r>"]<esc>
