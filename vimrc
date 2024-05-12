@@ -24,15 +24,17 @@ command! Build execute 'silent make' | redraw! | cw
 command! MkdirAndSave execute 'silent !mkdir -p %:h' | redraw! | w
 
 " colorscheme
-" colorscheme tokyonight
-" hi Normal ctermbg=NONE
-" hi CursorLine ctermbg=black
+hi LineNr ctermfg=248
+hi MatchParen term=bold cterm=bold ctermfg=11 ctermbg=NONE guifg=#ffff00 guibg=NONE
+hi Pmenu ctermbg=239 ctermfg=14
+hi PmenuSel ctermbg=14 ctermfg=0
+hi CursorLine term=NONE cterm=NONE ctermbg=239
+hi CursorLineNr term=NONE cterm=NONE
 
-" colorscheme koehler
-" hi MatchParen term=bold cterm=bold ctermfg=226 ctermbg=NONE guifg=#ffff00 guibg=NONE
-
-colorscheme rosepine
-hi Normal ctermbg=NONE
+" statusline setting
+hi CommandDisp ctermfg=0 ctermbg=11
+hi GitDisp ctermfg=11 ctermbg=242
+hi FileDisp ctermfg=white ctermbg=239
 
 " status line plugin
 let g:modes = {
@@ -51,7 +53,7 @@ function! GetFileType()
     if &filetype == ""
         return ""
     endif
-    return "%#Question# %y"
+    return "%#GitDisp# %y"
 endfunction
 
 function! GetLineAndColumn()
@@ -63,27 +65,15 @@ let g:git_branch = ""
 function! GetGitBranch()
     let l:branch = system("git branch | grep ^* | sed 's/\* //'")
     if l:branch != ""
-        " for koehler
-        " let g:git_branch = \"%#Folded# \".split(l:branch, '\n')[0]." "
-
         " for rosepine
-        let g:git_branch = "%#Question# ".split(l:branch, '\n')[0]." "
-
-        " for tokyonight
-        " let g:git_branch = \"%#Folded# \".split(l:branch, '\n')[0]." "
+        let g:git_branch = "%#GitDisp# ".split(l:branch, '\n')[0]." "
     endif
 endfunction
 
 call GetGitBranch()
 
 " rosepine statusline
-set statusline=%#CurSearch#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Pmenu#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#CurSearch#\ %{%GetLineAndColumn()%}
-
-" koehler statusline
-" set statusline=%#PmenuSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Pmenu#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#PmenuSel#\ %{%GetLineAndColumn()%}
-
-" tokyonight statusline
-" set statusline=%#TabLineSel#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#Pmenu#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#TabLineSel#\ %{%GetLineAndColumn()%}
+set statusline=%#CommandDisp#\ %{g:modes[mode()]}\ %{%g:git_branch%}%#FileDisp#\ %f\ %m\ %r\ %h\ %w%=%{%GetFileType()%}\ %#CommandDisp#\ %{%GetLineAndColumn()%}
 
 " file to register
 function! FileToRegister()
