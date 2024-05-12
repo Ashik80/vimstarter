@@ -28,13 +28,13 @@ hi LineNr ctermfg=248
 hi MatchParen term=bold cterm=bold ctermfg=11 ctermbg=NONE guifg=#ffff00 guibg=NONE
 hi Pmenu ctermbg=239 ctermfg=14
 hi PmenuSel ctermbg=14 ctermfg=0
-hi CursorLine term=NONE cterm=NONE ctermbg=239
+hi CursorLine term=NONE cterm=NONE ctermbg=237
 hi CursorLineNr term=NONE cterm=NONE
 
 " statusline setting
 hi CommandDisp ctermfg=0 ctermbg=11
-hi GitDisp ctermfg=11 ctermbg=242
-hi FileDisp ctermfg=white ctermbg=239
+hi GitDisp ctermfg=11 ctermbg=239
+hi FileDisp ctermfg=white ctermbg=237
 
 " status line plugin
 let g:modes = {
