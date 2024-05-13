@@ -138,6 +138,22 @@ augroup TermNoNumber
     au! TerminalOpen * setlocal nonumber
 augroup END
 
+
+" Comment syntax highlighting
+hi TodoComment term=bold cterm=bold ctermfg=0 ctermbg=14
+call matchadd("TodoComment", " TODO:")
+
+hi WarnComment term=bold cterm=bold ctermfg=0 ctermbg=11
+call matchadd("WarnComment", " WARN:")
+
+hi InfoComment term=bold cterm=bold ctermfg=0 ctermbg=13
+call matchadd("InfoComment", " INFO:")
+
+hi BugComment term=bold cterm=bold ctermfg=0 ctermbg=9
+call matchadd("BugComment", " BUG:")
+call matchadd("BugComment", " ERROR:")
+
+
 " mappings
 
 " clipboard mapping
