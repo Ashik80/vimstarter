@@ -17,6 +17,7 @@ set showcmd
 set ttimeoutlen=0
 set scrolloff=8
 set cursorline
+set autoread
 
 " commands
 command! ListFiles execute '.!find . -type d \( -name .git -o -name node_modules -o -name .build -o -name dist -o -name __pycache__ -o -name .next -o -name target \) -prune -o -type f -print | sed "s/^\.\///"'
@@ -132,8 +133,28 @@ function! VimGrepProjectForExactWord()
     cwindow
 endfunction
 
+" remove line numbers for the terminal buffer
+augroup TermNoNumber
+    au! TerminalOpen * setlocal nonumber
+augroup END
+
 " mappings
-vnoremap <leader>y :w !xclip -selection 'clipboard'<CR><CR>
+
+" clipboard mapping
+if has("clipboard")
+    vnoremap <leader>y "+y
+    nnoremap <leader>y "+y
+    vnoremap <leader>Y "+Y
+    nnoremap <leader>Y "+Y
+
+    vnoremap <leader>cp "+p
+    nnoremap <leader>cp "+p
+    vnoremap <leader>cP "+P
+    nnoremap <leader>cP "+P
+else
+    vnoremap <leader>y :w !xclip -selection 'clipboard'<CR><CR>
+endif
+
 nnoremap <leader>yf <cmd>let @f = expand("%:.")<CR>
 nnoremap <leader>q <cmd>qa!<CR>
 nnoremap <leader>fr <cmd>call FileToRegister()<CR>

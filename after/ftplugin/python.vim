@@ -1,6 +1,10 @@
 runtime! commenter.vim
 
-command! MakeTags execute 'silent !ctags -R --exclude=.git --exclude=venv .' | redraw! | e
+command! MakeTags execute 'silent !ctags -R --exclude=.git --exclude=venv .' | redraw!
+
+augroup FormatWithBlack
+    au! BufWritePost * silent execute "!black %" | redraw!
+augroup END
 
 " generates the relative path of the file being imported from the project root
 function! ImportRelativeFile()
