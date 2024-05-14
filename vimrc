@@ -181,8 +181,8 @@ vnoremap < <gv
 nnoremap <leader>b <cmd>Build<CR>
 nnoremap <C-n> <cmd>cn<CR>
 nnoremap <C-p> <cmd>cp<CR>
-nnoremap <leader>t <cmd>call ToggleTerm()<CR>
-tnoremap <leader>t <cmd>call ToggleTerm()<CR>
+nnoremap <Esc>t <cmd>call ToggleTerm()<CR>
+tnoremap <Esc>t <cmd>call ToggleTerm()<CR>
 nnoremap <leader>fg <cmd>call VimGrepProject()<CR>
 nnoremap <leader>fw <cmd>call VimGrepProjectForExactWord()<CR>
 nnoremap <leader>ff <cmd>b 1<CR>
