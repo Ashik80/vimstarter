@@ -31,6 +31,9 @@ hi Pmenu ctermbg=239 ctermfg=14
 hi PmenuSel ctermbg=14 ctermfg=0
 hi CursorLine term=NONE cterm=NONE ctermbg=237
 hi CursorLineNr term=NONE cterm=NONE
+hi SpellBad term=underline cterm=underline ctermfg=9 ctermbg=NONE
+hi SpellCap term=underline cterm=underline ctermfg=12 ctermbg=NONE
+hi SignColumn ctermbg=NONE
 
 " statusline setting
 hi CommandDisp ctermfg=0 ctermbg=11
@@ -153,6 +156,8 @@ hi BugComment term=bold cterm=bold ctermfg=0 ctermbg=9
 call matchadd("BugComment", " BUG:")
 call matchadd("BugComment", " ERROR:")
 
+hi NoteComment term=bold cterm=bold ctermfg=0 ctermbg=121
+call matchadd("NoteComment", " NOTE:")
 
 " mappings
 
@@ -197,3 +202,12 @@ vnoremap <leader>' c'<c-r>"'<esc>
 vnoremap <leader>) c(<c-r>")<esc>
 vnoremap <leader>} c{<c-r>"}<esc>
 vnoremap <leader>] c[<c-r>"]<esc>
+
+
+" ale settings
+set omnifunc=ale#completion#OmniFunc
+set signcolumn=yes
+nnoremap K <cmd>ALEHover<CR>
+nnoremap <leader>gd <cmd>ALEGoToDefinition<CR>
+nnoremap <leader>gr <cmd>ALEFindReferences<CR>
+nnoremap <leader>ca <cmd>ALECodeAction<CR>
