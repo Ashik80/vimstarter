@@ -23,7 +23,7 @@ let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 
 " commands
-command! ListFiles execute '.!find . -type d \( -name .git -o -name node_modules -o -name .build -o -name dist -o -name __pycache__ -o -name .next -o -name target \) -prune -o -type f -print | sed "s/^\.\///"'
+command! ListFiles execute '.!find . -type d \( -name pack -o -name .git -o -name node_modules -o -name .build -o -name dist -o -name __pycache__ -o -name .next -o -name target \) -prune -o -type f -print | sed "s/^\.\///"'
 command! Build execute 'silent make' | redraw! | cw
 command! MkdirAndSave execute 'silent !mkdir -p %:h' | redraw! | w
 
@@ -116,26 +116,26 @@ endfunction
 " change to grep in the keybinding if more speed is needed
 function! GrepProject()
     let l:word = input("Search for pattern: ")
-    execute "grep! -Ri --exclude={tags,tsconfig.tsbuildinfo} --exclude-dir={.git,node_modules,.next,.build,dist,target,__pycache__} ".l:word." ."
+    execute "grep! -Ri --exclude={tags,tsconfig.tsbuildinfo} --exclude-dir={pack,.git,node_modules,.next,.build,dist,target,__pycache__} ".l:word." ."
     cwindow
 endfunction
 
 function! VimGrepProject()
     let l:word = input("Search for pattern: ")
-    execute 'vimgrep! /'.l:word.'/ `find . -type d \( -name .git -o -name node_modules -o -name .next -o -name .build -o -name dist -o -name target -o -name __pycache__ \) -prune -o -type f \( -name tags -o -name tsconfig.tsbuildinfo \) -prune -o -type f -print`'
+    execute 'vimgrep! /'.l:word.'/ `find . -type d \( -name pack -o -name .git -o -name node_modules -o -name .next -o -name .build -o -name dist -o -name target -o -name __pycache__ \) -prune -o -type f \( -name tags -o -name tsconfig.tsbuildinfo \) -prune -o -type f -print`'
     cwindow
 endfunction
 
 function! GrepProjectForExactWord()
     let l:word = input("Search for exact word: ")
     echo "\n".l:word
-    execute "grep! -Riw --exclude={tags,tsconfig.tsbuildinfo} --exclude-dir={.git,node_modules,.next,.build,dist,target,__pycache__} ".l:word." ."
+    execute "grep! -Riw --exclude={tags,tsconfig.tsbuildinfo} --exclude-dir={pack,.git,node_modules,.next,.build,dist,target,__pycache__} ".l:word." ."
     cwindow
 endfunction
 
 function! VimGrepProjectForExactWord()
     let l:word = input("Search for exact word: ")
-    execute 'vimgrep! /\<'.l:word.'\>/ `find . -type d \( -name .git -o -name node_modules -o -name .next -o -name .build -o -name dist -o -name target -o -name __pycache__ \) -prune -o -type f \( -name tags -o -name tsconfig.tsbuildinfo \) -prune -o -type f -print`'
+    execute 'vimgrep! /\<'.l:word.'\>/ `find . -type d \( -name pack -o -name .git -o -name node_modules -o -name .next -o -name .build -o -name dist -o -name target -o -name __pycache__ \) -prune -o -type f \( -name tags -o -name tsconfig.tsbuildinfo \) -prune -o -type f -print`'
     cwindow
 endfunction
 
