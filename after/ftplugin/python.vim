@@ -2,9 +2,8 @@ runtime! commenter.vim
 
 command! MakeTags execute 'silent !ctags -R --exclude=.git --exclude=venv .' | redraw!
 
-augroup FormatWithBlack
-    au! BufWritePost * silent execute "!black %" | redraw!
-augroup END
+let b:ale_fixers = ['black']
+let b:ale_fix_on_save = 1
 
 " generates the relative path of the file being imported from the project root
 function! ImportRelativeFile()
