@@ -22,8 +22,10 @@ set autoread
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 
+let g:find_ignore_dir = "-type d \\( -name pack -o -name .git -o -name node_modules -o -name .build -o -name dist -o -name __pycache__ -o -name .next -o -name target \\) -prune -o"
+
 " commands
-command! ListFiles execute '.!find . -type d \( -name pack -o -name .git -o -name node_modules -o -name .build -o -name dist -o -name __pycache__ -o -name .next -o -name target \) -prune -o -type f -print | sed "s/^\.\///"'
+command! ListFiles execute ".!find . ".g:find_ignore_dir." -type f -print | sed 's/^\\.\\///'"
 command! Build execute 'silent make' | redraw! | cw
 command! MkdirAndSave execute 'silent !mkdir -p %:h' | redraw! | w
 
@@ -122,7 +124,7 @@ endfunction
 
 function! VimGrepProject()
     let l:word = input("Search for pattern: ")
-    execute 'vimgrep! /'.l:word.'/ `find . -type d \( -name pack -o -name .git -o -name node_modules -o -name .next -o -name .build -o -name dist -o -name target -o -name __pycache__ \) -prune -o -type f \( -name tags -o -name tsconfig.tsbuildinfo \) -prune -o -type f -print`'
+    execute "vimgrep! /".l:word."/ `find . ".g:find_ignore_dir." -type f \\( -name tags -o -name tsconfig.tsbuildinfo \\) -prune -o -type f -print`"
     cwindow
 endfunction
 
@@ -135,7 +137,7 @@ endfunction
 
 function! VimGrepProjectForExactWord()
     let l:word = input("Search for exact word: ")
-    execute 'vimgrep! /\<'.l:word.'\>/ `find . -type d \( -name pack -o -name .git -o -name node_modules -o -name .next -o -name .build -o -name dist -o -name target -o -name __pycache__ \) -prune -o -type f \( -name tags -o -name tsconfig.tsbuildinfo \) -prune -o -type f -print`'
+    execute "vimgrep! /\\<".l:word."\\>/ `find . ".g:find_ignore_dir." -type f \\( -name tags -o -name tsconfig.tsbuildinfo \\) -prune -o -type f -print`"
     cwindow
 endfunction
 
