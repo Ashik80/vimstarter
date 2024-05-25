@@ -18,6 +18,7 @@ set ttimeoutlen=0
 set scrolloff=8
 set cursorline
 set autoread
+set noshowmode
 
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
@@ -37,11 +38,6 @@ let g:everforest_background = 'hard'
 let g:everforest_better_performance = 1
 colorscheme everforest
 
-" statusline setting
-hi CommandDisp ctermfg=235 ctermbg=142 guifg=#272e33 guibg=#a7c080
-hi GitDisp ctermfg=142 ctermbg=237 guifg=#a7c080 guibg=#374145
-hi FileDisp ctermfg=245 ctermbg=236 guifg=#859289 guibg=#2e383c
-
 " status line plugin
 let g:modes = {
             \ 'n': 'NORMAL',
@@ -54,6 +50,10 @@ let g:modes = {
             \ 'r': 'REPLACE',
             \ 't': 'TERMINAL'
             \ }
+
+hi CommandDisp ctermfg=235 ctermbg=142 guifg=#272e33 guibg=#a7c080
+hi GitDisp ctermfg=142 ctermbg=237 guifg=#a7c080 guibg=#374145
+hi FileDisp ctermfg=245 ctermbg=236 guifg=#859289 guibg=#2e383c
 
 function! GetFileType()
     if &filetype == ""
@@ -71,7 +71,6 @@ let g:git_branch = ""
 function! GetGitBranch()
     let l:branch = system("git branch | grep ^* | sed 's/\* //'")
     if l:branch != ""
-        " for rosepine
         let g:git_branch = "%#GitDisp# ".split(l:branch, '\n')[0]." "
     endif
 endfunction
@@ -126,7 +125,6 @@ endfunction
 
 function! GrepProjectForExactWord()
     let l:word = input("Search for exact word: ")
-    echo "\n".l:word
     execute "grep! -Riw --exclude={tags,tsconfig.tsbuildinfo} --exclude-dir={pack,.git,node_modules,.next,.build,dist,target,__pycache__} ".l:word." ."
     cwindow
 endfunction
@@ -141,7 +139,6 @@ endfunction
 augroup TermNoNumber
     au! TerminalOpen * setlocal nonumber
 augroup END
-
 
 " Comment syntax highlighting
 hi TodoComment term=bold cterm=bold ctermfg=0 ctermbg=14
