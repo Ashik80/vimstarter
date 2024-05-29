@@ -20,8 +20,9 @@ set cursorline
 set autoread
 set noshowmode
 
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
+" Change cursor style
+" let &t_SI = \"\e[6 q"
+" let &t_EI = \"\e[2 q"
 
 let g:find_ignore_dir = "-type d \\( -name pack -o -name .git -o -name node_modules -o -name .build -o -name dist -o -name __pycache__ -o -name .next -o -name target \\) -prune -o"
 
