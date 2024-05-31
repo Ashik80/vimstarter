@@ -201,6 +201,8 @@ vnoremap <leader>' c'<c-r>"'<esc>
 vnoremap <leader>) c(<c-r>")<esc>
 vnoremap <leader>} c{<c-r>"}<esc>
 vnoremap <leader>] c[<c-r>"]<esc>
+" create file in current directory
+nnoremap <leader>cf :e %:h
 
 
 " ale settings
