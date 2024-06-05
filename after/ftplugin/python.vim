@@ -4,6 +4,7 @@ command! MakeTags execute 'silent !ctags -R --exclude=.git --exclude=venv .' | r
 
 let b:ale_fixers = ['black']
 let b:ale_fix_on_save = 1
+let b:ale_linters_ignore = ['mypy']
 
 " generates the relative path of the file being imported from the project root
 function! ImportRelativeFile()
